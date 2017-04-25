@@ -1,8 +1,10 @@
 package su.bbrain.www.yandextranslator.fragment;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -10,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -131,7 +134,9 @@ public class TranslatorFragment extends AbstractTabFragment {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
+            inputField.clearFocus();
             new AsyncRequest(getWord()).execute("");
+            checkBox.setChecked(FavoritesFragment.wordList.contains(getWord()));
         }
 
         @Override
@@ -173,4 +178,7 @@ public class TranslatorFragment extends AbstractTabFragment {
 
         return new Word(s1, s2,language1.getCode(),language2.getCode());
     }
+
+
+
 }

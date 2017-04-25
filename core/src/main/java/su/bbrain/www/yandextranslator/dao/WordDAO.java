@@ -54,7 +54,11 @@ public class WordDAO {
         String text = StringEscapeUtils.escapeSql(word.getText());
 
         PreparedStatement preparedStatement = SQLiteConnection.getConnection()
-                .prepareStatement("delete from word where \"text\" = '"+text+"'");
+                .prepareStatement("delete from word " +
+                        "where " +
+                        "\"text\" = '"+text+"' " +
+                        " and codeLanguageFrom = '"+word.getCodeLanguageFrom()+"' "+
+                        " and codeLanguageTo = '"+word.getCodeLanguageTo()+"' ");
         preparedStatement.executeUpdate();
     }
 
