@@ -79,16 +79,9 @@ public class TranslatorFragment extends AbstractTabFragment {
         inputField.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                String s1 = inputField.getText().toString();
-                Language language1 = Language.values()[spinner1.getSelectedItemPosition()];
-                Language language2 = Language.values()[spinner2.getSelectedItemPosition()];
-                checkBox.setChecked(false);
-                new AsyncRequest(language1, language2, s1).execute("");
-//                try {
-//                    Initializer.getWordDAO().insertWord(new Word(s1,translatedText.getText().toString(),language1.getCode(),language2.getCode()));
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
+                new AsyncRequest(getWord()).execute("");
+
+                checkBox.setChecked(FavoritesFragment.wordList.contains(getWord()));
             }
 
             @Override
@@ -101,31 +94,28 @@ public class TranslatorFragment extends AbstractTabFragment {
         });
 
 
-//        checkBox.setChecked(statusCheckBox);
+
         checkBox.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
                                             WordDAO wordDAO = Initializer.getWordDAO();
-                                            String text = inputField.getText().toString();
-                                            String textTranslator = translatedText.getText().toString();
-                                            Language language1 = Language.values()[spinner1.getSelectedItemPosition()];
-                                            Language language2 = Language.values()[spinner2.getSelectedItemPosition()];
-                                            Word word = new Word(text, textTranslator, language1.getCode(), language2.getCode());
+
                                             if (checkBox.isChecked()) {
                                                 try {
-                                                    wordDAO.insertWordFavorite(word);
+                                                    wordDAO.insertWordFavorite(getWord());
                                                 } catch (SQLException e) {
                                                     e.printStackTrace();
                                                 }
                                             } else {
                                                 try {
-                                                    wordDAO.deleteFavorite(word);
+                                                    wordDAO.deleteFavorite(getWord());
                                                 } catch (SQLException e) {
                                                     e.printStackTrace();
                                                 }
 
                                             }
                                             List<Word> favoriteAllPost = wordDAO.getFavoriteAllPost();
+                                            FavoritesFragment.wordList=favoriteAllPost;
                                             FavoritesFragment.favoriteListAdapter.setWordList(favoriteAllPost);
                                             FavoritesFragment.favoriteListAdapter.notifyDataSetChanged();
                                         }
@@ -141,10 +131,7 @@ public class TranslatorFragment extends AbstractTabFragment {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View itemSelected, int selectedItemPosition, long selectedId) {
-            String s1 = inputField.getText().toString();
-            Language language1 = Language.values()[spinner1.getSelectedItemPosition()];
-            Language language2 = Language.values()[spinner2.getSelectedItemPosition()];
-            new AsyncRequest(language1, language2, s1).execute("");
+            new AsyncRequest(getWord()).execute("");
         }
 
         @Override
@@ -154,21 +141,17 @@ public class TranslatorFragment extends AbstractTabFragment {
 
     class AsyncRequest extends AsyncTask<String, Integer, String> {
 
-        private Language language1;
-        private Language language2;
-        private String text;
+        private Word word;
 
-        public AsyncRequest(Language language1, Language language2, String text) {
-            this.language1 = language1;
-            this.language2 = language2;
-            this.text = text;
+        public AsyncRequest(Word word) {
+            this.word =word;
         }
 
         @Override
         protected String doInBackground(String... arg) {
             Translate.setKey(ApiKeys.YANDEX_API_KEY);
             try {
-                return Translate.execute(text, language1, language2);
+                return Translate.execute(word.getText(), Language.fromCode(word.getCodeLanguageFrom()), Language.fromCode(word.getCodeLanguageTo()));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -180,5 +163,14 @@ public class TranslatorFragment extends AbstractTabFragment {
             super.onPostExecute(s);
             translatedText.setText(s);
         }
+    }
+
+    public Word getWord(){
+        String s1 = inputField.getText().toString();
+        String s2 = translatedText.getText().toString();
+        Language language1 = Language.values()[spinner1.getSelectedItemPosition()];
+        Language language2 = Language.values()[spinner2.getSelectedItemPosition()];
+
+        return new Word(s1, s2,language1.getCode(),language2.getCode());
     }
 }

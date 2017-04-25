@@ -48,14 +48,9 @@ public class FavoritesFragment extends AbstractTabFragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         wordList = Initializer.getWordDAO().getFavoriteAllPost();
         favoriteListAdapter = new FavoriteListAdapter(wordList);
-//        favoriteListAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(favoriteListAdapter);
         return view;
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        favoriteListAdapter.notifyDataSetChanged();
-//    }
+
 }
