@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+<domain-config>
+    <domain includeSubdomains="true">translate.yandex.net</domain>
+    <pin digest="SHA-256">F3AC31F2BD78882C3BA267406A2A9F1122371A98D05709FC1916D98651CFE57F
+        <pin-set expiration="2018-07-01"/>
+    </pin>
+</domain-config>
+</network-security-config>
