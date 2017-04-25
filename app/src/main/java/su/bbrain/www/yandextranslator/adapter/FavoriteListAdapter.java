@@ -59,8 +59,8 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
             super(itemView);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
 
-            text = (TextView) itemView.findViewById(R.id.itemTextViewTitle);
-            textTranslator = (TextView) itemView.findViewById(R.id.textDescription);
+            text = (TextView) itemView.findViewById(R.id.textFrom);
+            textTranslator = (TextView) itemView.findViewById(R.id.textTo);
 
             codeLanguageFrom = (TextView) itemView.findViewById(R.id.codeLanguageFrom);
             codeLanguageTo = (TextView) itemView.findViewById(R.id.codeLanguageTo);

@@ -16,19 +16,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import su.bbrain.www.yandextranslator.R;
-import su.bbrain.www.yandextranslator.adapter.SpinnerAdapter;
-import su.bbrain.www.yandextranslator.fragment.abstact.AbstractTabFragment;
-import su.bbrain.www.yandextranslator.yandex.ApiKeys;
-import su.bbrain.www.yandextranslator.yandex.language.Language;
-import su.bbrain.www.yandextranslator.yandex.translate.Translate;
-
 import java.sql.SQLException;
 import java.util.List;
 
+import su.bbrain.www.yandextranslator.R;
+import su.bbrain.www.yandextranslator.adapter.SpinnerAdapter;
 import su.bbrain.www.yandextranslator.dao.WordDAO;
 import su.bbrain.www.yandextranslator.database.Initializer;
+import su.bbrain.www.yandextranslator.fragment.abstact.AbstractTabFragment;
 import su.bbrain.www.yandextranslator.object.Word;
+import su.bbrain.www.yandextranslator.yandex.ApiKeys;
+import su.bbrain.www.yandextranslator.yandex.language.Language;
+import su.bbrain.www.yandextranslator.yandex.translate.Translate;
 
 public class TranslatorFragment extends AbstractTabFragment {
 
@@ -107,21 +106,28 @@ public class TranslatorFragment extends AbstractTabFragment {
                                         @Override
                                         public void onClick(View v) {
                                             WordDAO wordDAO = Initializer.getWordDAO();
-                                            String s1 = inputField.getText().toString();
-                                            String s2 = translatedText.getText().toString();
+                                            String text = inputField.getText().toString();
+                                            String textTranslator = translatedText.getText().toString();
                                             Language language1 = Language.values()[spinner1.getSelectedItemPosition()];
                                             Language language2 = Language.values()[spinner2.getSelectedItemPosition()];
-                                            try {
-                                                wordDAO.insertWordFavorite(new Word(s1, s2, language1.getCode(), language2.getCode()));
-                                                List<Word> favoriteAllPost = wordDAO.getFavoriteAllPost();
-                                                FavoritesFragment.favoriteListAdapter.setWordList(favoriteAllPost);
-                                                 FavoritesFragment.favoriteListAdapter.notifyDataSetChanged();
+                                            Word word = new Word(text, textTranslator, language1.getCode(), language2.getCode());
+                                            if (checkBox.isChecked()) {
+                                                try {
+                                                    wordDAO.insertWordFavorite(word);
+                                                } catch (SQLException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            } else {
+                                                try {
+                                                    wordDAO.deleteFavorite(word);
+                                                } catch (SQLException e) {
+                                                    e.printStackTrace();
+                                                }
 
-
-                                            } catch (SQLException e) {
-                                                e.printStackTrace();
                                             }
-
+                                            List<Word> favoriteAllPost = wordDAO.getFavoriteAllPost();
+                                            FavoritesFragment.favoriteListAdapter.setWordList(favoriteAllPost);
+                                            FavoritesFragment.favoriteListAdapter.notifyDataSetChanged();
                                         }
                                     }
         );

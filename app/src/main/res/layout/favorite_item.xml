@@ -18,34 +18,52 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-            <TextView
-                android:id="@+id/codeLanguageFrom"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Test description" />
-            <TextView
-                android:id="@+id/itemTextViewTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="5dp"
-                android:textColor="@android:color/black"
-                android:textSize="8pt" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textFrom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="textFrom"
+                    android:textColor="@android:color/black"
+                    android:textSize="8pt" />
+
+                <TextView
+                    android:id="@+id/codeLanguageFrom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="codeLanguageFrom"
+                    android:layout_marginLeft="15dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textTo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="textTo"
+                    android:textColor="@android:color/black"
+                    android:textSize="8pt" />
+
                 <TextView
                     android:id="@+id/codeLanguageTo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Test description"/>
-                <TextView
-                    android:id="@+id/textDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Test description" />
-            </LinearLayout>
+                    android:text="codeLanguageFrom"
+                    android:layout_marginLeft="15dp"/>
 
+            </LinearLayout>
 
 
         </LinearLayout>

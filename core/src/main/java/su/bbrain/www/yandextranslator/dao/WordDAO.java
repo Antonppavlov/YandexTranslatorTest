@@ -1,6 +1,8 @@
 package su.bbrain.www.yandextranslator.dao;
 
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,19 +50,29 @@ public class WordDAO {
         return postList;
     }
 
+    public void deleteFavorite(Word word) throws SQLException {
+        String text = StringEscapeUtils.escapeSql(word.getText());
 
-//    public void insertWord(Word word) throws SQLException {
-//        PreparedStatement preparedStatement = SQLiteConnection.getConnection()
-//                .prepareStatement("insert into word (\"text\",translatorText,codeLanguageFrom,codeLanguageTo) values ('"+word.getText()+"','"+word.getTranslatorText()+"','"+word.getCodeLanguageFrom()+"','"+word.getCodeLanguageTo()+ "');");
-//        preparedStatement.executeUpdate();
-//    }
-
-    public void insertWordFavorite(Word word) throws SQLException {
         PreparedStatement preparedStatement = SQLiteConnection.getConnection()
-                .prepareStatement("insert into word (\"text\",translatorText,codeLanguageFrom,codeLanguageTo,favorite) " +
-                        "values ('"+word.getText()+"','"+word.getTranslatorText()+"','"+word.getCodeLanguageFrom()+"','"+word.getCodeLanguageTo()+"','true')\n" + "\n");
+                .prepareStatement("delete from word where \"text\" = '"+text+"'");
         preparedStatement.executeUpdate();
     }
+
+    public void insertWordFavorite(Word word) throws SQLException {
+        String text = StringEscapeUtils.escapeSql(word.getText());
+        String translatorText = StringEscapeUtils.escapeSql(word.getTranslatorText());
+        String codeLanguageFrom = StringEscapeUtils.escapeSql(word.getCodeLanguageFrom());
+        String codeLanguageTo = StringEscapeUtils.escapeSql(word.getCodeLanguageTo());
+
+
+        deleteFavorite(word);
+
+        PreparedStatement preparedStatement = SQLiteConnection.getConnection()
+                .prepareStatement("insert into word (\"text\",translatorText,codeLanguageFrom,codeLanguageTo,favorite) " +
+                        "values ('"+text+"','"+translatorText+"','"+codeLanguageFrom+"','"+codeLanguageTo+"','true')\n" + "\n");
+        preparedStatement.executeUpdate();
+    }
+
 
     private Word createObject(ResultSet resultSet) throws SQLException {
 

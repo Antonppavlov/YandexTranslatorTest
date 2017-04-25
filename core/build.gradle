@@ -5,6 +5,7 @@ dependencies {
     compile 'junit:junit:4.12'
 
     compile 'org.sqldroid:sqldroid:1.0.3'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.3'
 }
 
 sourceCompatibility = "1.7"
