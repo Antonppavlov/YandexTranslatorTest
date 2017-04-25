@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import su.bbrain.www.yandextranslator.R;
-import su.bbrain.www.yandextranslator.adapter.RemindListAdapter;
+import su.bbrain.www.yandextranslator.adapter.FavoriteListAdapter;
 import su.bbrain.www.yandextranslator.fragment.abstact.AbstractTabFragment;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class FavoritesFragment extends AbstractTabFragment {
 
     private Context context;
     private View view;
-    public static RemindListAdapter remindListAdapter;
+    public static FavoriteListAdapter favoriteListAdapter;
    public static List<Word> wordList;
 
 
@@ -47,15 +47,15 @@ public class FavoritesFragment extends AbstractTabFragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         wordList = Initializer.getWordDAO().getFavoriteAllPost();
-        remindListAdapter = new RemindListAdapter(wordList);
-//        remindListAdapter.notifyDataSetChanged();
-        recyclerView.setAdapter(remindListAdapter);
+        favoriteListAdapter = new FavoriteListAdapter(wordList);
+//        favoriteListAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(favoriteListAdapter);
         return view;
     }
 
 //    @Override
 //    public void onResume() {
 //        super.onResume();
-//        remindListAdapter.notifyDataSetChanged();
+//        favoriteListAdapter.notifyDataSetChanged();
 //    }
 }

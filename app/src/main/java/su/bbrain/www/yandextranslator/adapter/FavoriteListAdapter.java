@@ -13,28 +13,28 @@ import java.util.List;
 
 import su.bbrain.www.yandextranslator.object.Word;
 
-public class RemindListAdapter extends RecyclerView.Adapter<RemindListAdapter.RemindViewHolder> {
+public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapter.RemindViewHolder> {
 
-    private  List<Word>  remindDTOList;
+    private  List<Word> wordList;
 
-    public RemindListAdapter( List<Word>  remindDTOList) {
-        this.remindDTOList = remindDTOList;
+    public FavoriteListAdapter(List<Word> wordList) {
+        this.wordList = wordList;
     }
 
-    public void setRemindDTOList(List<Word> remindDTOList) {
-        this.remindDTOList = remindDTOList;
+    public void setWordList(List<Word> wordList) {
+        this.wordList = wordList;
     }
 
     @Override
     public RemindViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View inflate = layoutInflater.inflate(R.layout.remind_item, parent, false);
+        View inflate = layoutInflater.inflate(R.layout.favorite_item, parent, false);
         return new RemindViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(RemindViewHolder holder, int position) {
-        Word data = remindDTOList.get(position);
+        Word data = wordList.get(position);
 
         holder.text.setText(data.getText());
         holder.textTranslator.setText(data.getTranslatorText());
@@ -44,7 +44,7 @@ public class RemindListAdapter extends RecyclerView.Adapter<RemindListAdapter.Re
 
     @Override
     public int getItemCount() {
-        return remindDTOList.size();
+        return wordList.size();
     }
 
 

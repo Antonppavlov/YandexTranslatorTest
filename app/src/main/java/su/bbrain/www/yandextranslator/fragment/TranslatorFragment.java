@@ -114,8 +114,8 @@ public class TranslatorFragment extends AbstractTabFragment {
                                             try {
                                                 wordDAO.insertWordFavorite(new Word(s1, s2, language1.getCode(), language2.getCode()));
                                                 List<Word> favoriteAllPost = wordDAO.getFavoriteAllPost();
-                                                FavoritesFragment.remindListAdapter.setRemindDTOList(favoriteAllPost);
-                                                 FavoritesFragment.remindListAdapter.notifyDataSetChanged();
+                                                FavoritesFragment.favoriteListAdapter.setWordList(favoriteAllPost);
+                                                 FavoritesFragment.favoriteListAdapter.notifyDataSetChanged();
 
 
                                             } catch (SQLException e) {

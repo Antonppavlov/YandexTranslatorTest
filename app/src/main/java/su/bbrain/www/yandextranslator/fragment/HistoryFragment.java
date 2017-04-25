@@ -11,7 +11,7 @@ package su.bbrain.www.yandextranslator.fragment;//package su.bbrain.www.yandextr
 //import android.view.ViewGroup;
 //
 //import su.bbrain.www.yandextranslator.R;
-//import su.bbrain.www.yandextranslator.adapter.RemindListAdapter;
+//import su.bbrain.www.yandextranslator.adapter.FavoriteListAdapter;
 //import su.bbrain.www.yandextranslator.dto.RemindDTO;
 //import su.bbrain.www.yandextranslator.fragment.abstact.AbstractTabFragment;
 //
@@ -50,7 +50,7 @@ package su.bbrain.www.yandextranslator.fragment;//package su.bbrain.www.yandextr
 //
 //        List<Word> wordList = Initializer.getWordDAO().getWordList();
 //
-//        recyclerView.setAdapter(new RemindListAdapter(wordList));
+//        recyclerView.setAdapter(new FavoriteListAdapter(wordList));
 //
 //        return view;
 //    }
