@@ -10,19 +10,19 @@
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       />
+
+        />
 
     <EditText
         android:id="@+id/inputField"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -37,6 +37,35 @@
         android:paddingTop="10dp"
         android:scrollbars="vertical" />
 
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <CheckBox
+            android:id="@+id/chbFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:button="@drawable/favorite" />
+
+        <Button
+            android:id="@+id/buttonTranslator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#FFDC61"
+            android:text="Перевести"
+            android:onClick="method"/>
+    </GridLayout>
+
+
     <TextView
         android:id="@+id/translatedText"
         android:layout_width="match_parent"
@@ -47,13 +76,6 @@
         android:layout_marginTop="15dp"
         android:textSize="18sp"
         android:typeface="monospace" />
-
-    <CheckBox
-        android:id="@+id/chbFavorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:button="@drawable/favorite" />
 
 
 </LinearLayout>
